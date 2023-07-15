@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/main_button.dart';
+import 'package:workout_app/screens/exercises_main_screen.dart';
 import 'package:workout_app/screens/routines_main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,13 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: ((BuildContext context) => const RoutinesScreen()),
-                ),
-              );
-            },
+            onTap: () => navToScreen(context, const RoutinesScreen()),
             child: MainButton(
               foregroundColor: Colors.white,
               backgroundColor: mainThemeColour,
@@ -46,9 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              print("pressed");
-            },
+            onTap: () => navToScreen(context, const ExercisesScreen()),
             child: MainButton(
               foregroundColor: Colors.white,
               backgroundColor: mainThemeColour,
@@ -61,4 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
     );
   }
+}
+
+void navToScreen(
+  BuildContext context,
+  Widget screen,
+) {
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: ((BuildContext context) => screen),
+    ),
+  );
 }
