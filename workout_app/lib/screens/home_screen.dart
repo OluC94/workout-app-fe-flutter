@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/main_button.dart';
+import 'package:workout_app/screens/routines_main_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +9,9 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
+double mainButtonSize = 275;
+Color mainThemeColour = const Color.fromARGB(255, 35, 119, 160);
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -25,21 +29,33 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MainButton(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.blueGrey,
-            borderColor: Colors.grey,
-            text: 'Explore Routines',
-            size: 250,
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((BuildContext context) => const RoutinesScreen()),
+                ),
+              );
+            },
+            child: MainButton(
+              foregroundColor: Colors.white,
+              backgroundColor: mainThemeColour,
+              borderColor: Colors.grey,
+              text: 'Routines',
+              size: mainButtonSize,
+            ),
           ),
-          MainButton(
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.blueGrey,
-            borderColor: Colors.grey,
-            icon: Icons.home,
-            text: '',
-            isIcon: true,
-            size: 250,
+          GestureDetector(
+            onTap: () {
+              print("pressed");
+            },
+            child: MainButton(
+              foregroundColor: Colors.white,
+              backgroundColor: mainThemeColour,
+              borderColor: Colors.grey,
+              text: 'Exercises',
+              size: mainButtonSize,
+            ),
           ),
         ],
       )),
