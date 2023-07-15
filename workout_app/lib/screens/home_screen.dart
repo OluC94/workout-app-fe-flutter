@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/components/app_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text(
-          "Workout App",
-          style: TextStyle(color: Colors.red),
+    return const Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
+        title: "custom app bar",
+        leading: Icon(
+          Icons.home,
+          color: Colors.red,
         ),
       ),
-      body: const Center(child: Text('Home screen')),
+      body: Center(child: Text('Home screen')),
     );
   }
 }
