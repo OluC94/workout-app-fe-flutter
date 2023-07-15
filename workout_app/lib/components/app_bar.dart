@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Center(
                   child: Text(
                     title,
-                    style: const TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.blueGrey),
                   ),
                 ),
               ),
@@ -34,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       Transform.translate(
                         offset: const Offset(-14, 0),
                         child: const BackButton(
-                          color: Colors.red,
+                          color: Colors.blueGrey,
                         ),
                       )
                 ],
