@@ -31,7 +31,7 @@ class MainButton extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(15),
           border: Border.all(
             color: borderColor,
             width: 1.0,
@@ -42,7 +42,7 @@ class MainButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: foregroundColor,
-                  fontSize: 30,
+                  fontSize: 25,
                 ),
               )
             : Icon(

@@ -4,15 +4,14 @@ import 'package:workout_app/components/main_button.dart';
 import 'package:workout_app/screens/exercises_main_screen.dart';
 import 'package:workout_app/screens/routines_main_screen.dart';
 
+import '../utils/stlye_variables.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
-double mainButtonSize = 275;
-Color mainThemeColour = const Color.fromARGB(255, 35, 119, 160);
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
