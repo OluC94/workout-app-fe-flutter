@@ -8,7 +8,8 @@ class MainButton extends StatelessWidget {
       required this.backgroundColor,
       required this.borderColor,
       required this.text,
-      required this.size,
+      required this.boxWidth,
+      this.boxHeight,
       this.icon,
       this.isIcon});
 
@@ -17,19 +18,20 @@ class MainButton extends StatelessWidget {
   final Color borderColor;
   final String text;
   IconData? icon;
-  double size;
+  double boxWidth;
+  double? boxHeight;
   bool? isIcon = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size,
-      height: size,
+      width: boxWidth,
+      height: boxHeight ?? boxWidth,
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(15),
           border: Border.all(
             color: borderColor,
             width: 1.0,
@@ -40,7 +42,7 @@ class MainButton extends StatelessWidget {
                 text,
                 style: TextStyle(
                   color: foregroundColor,
-                  fontSize: 30,
+                  fontSize: 25,
                 ),
               )
             : Icon(
