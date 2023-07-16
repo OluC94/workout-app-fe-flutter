@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_search_form.dart';
-import 'package:workout_app/utils/stlye_variables.dart';
+import 'package:workout_app/components/routine_card.dart';
+import 'package:workout_app/utils/style_variables.dart';
 
 import '../components/main_button.dart';
 
@@ -37,13 +38,13 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             ),
             const CustomSearchForm(),
             Container(
-              height: 300,
-              width: 300,
+              height: 350,
+              width: 350,
               padding: EdgeInsets.all(25),
               margin: EdgeInsets.all(25),
               child: ListView(
                 scrollDirection: Axis.vertical,
-                children: const [Text("Placeholder 1"), Text('Placeholder 2')],
+                children: const [Text("Placeholder 1"), RoutineCard()],
               ),
             )
           ],
@@ -57,3 +58,5 @@ void searchFunction() {}
 
 // Routine Card
 // form field - how to group? 
+// From validation docs - https://docs.flutter.dev/cookbook/forms/validation
+ 
