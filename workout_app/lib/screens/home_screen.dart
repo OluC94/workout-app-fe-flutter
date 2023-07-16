@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: mainThemeColour,
               borderColor: Colors.grey,
               text: 'Routines',
-              size: mainButtonSize,
+              boxWidth: mainButtonSize,
             ),
           ),
           GestureDetector(
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: mainThemeColour,
               borderColor: Colors.grey,
               text: 'Exercises',
-              size: mainButtonSize,
+              boxWidth: mainButtonSize,
             ),
           ),
         ],
