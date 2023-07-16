@@ -36,6 +36,16 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               ),
             ),
             const CustomSearchForm(),
+            Container(
+              height: 300,
+              width: 300,
+              padding: EdgeInsets.all(25),
+              margin: EdgeInsets.all(25),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: const [Text("Placeholder 1"), Text('Placeholder 2')],
+              ),
+            )
           ],
         ),
       ),
