@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
+import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/utils/stlye_variables.dart';
 
 import '../components/main_button.dart';
@@ -34,6 +35,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 boxHeight: mainRectButtonHeight,
               ),
             ),
+            const CustomSearchForm(),
           ],
         ),
       ),
@@ -41,5 +43,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
   }
 }
 
+void searchFunction() {}
+
 // Routine Card
-// form field
+// form field - how to group? 
