@@ -4,7 +4,7 @@ import 'package:workout_app/components/main_button.dart';
 import 'package:workout_app/screens/exercises_main_screen.dart';
 import 'package:workout_app/screens/routines_main_screen.dart';
 
-import '../utils/stlye_variables.dart';
+import '../utils/style_variables.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
