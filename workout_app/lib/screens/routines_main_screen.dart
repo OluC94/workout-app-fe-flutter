@@ -15,6 +15,11 @@ class RoutinesScreen extends StatefulWidget {
 
 class _RoutinesScreenState extends State<RoutinesScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -40,11 +45,14 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
             Container(
               height: 350,
               width: 350,
-              padding: EdgeInsets.all(25),
-              margin: EdgeInsets.all(25),
+              padding: const EdgeInsets.all(25),
+              margin: const EdgeInsets.all(25),
               child: ListView(
                 scrollDirection: Axis.vertical,
-                children: const [Text("Placeholder 1"), RoutineCard()],
+                children: const [
+                  Text("Placeholder 1"),
+                  RoutineCard(),
+                ],
               ),
             )
           ],

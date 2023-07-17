@@ -11,9 +11,7 @@ class RoutineCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('placeholder1'),
-          Text('placeholder2'),
-          Text('placeholder3'),
+          Text("placeholder"),
         ],
       ),
     );
