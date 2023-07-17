@@ -23,16 +23,20 @@ class Exercise {
   }
 }
 
+class Routine {
+  final int routineId;
+  final String routineName;
+  final List routineDays;
 
-/* 
+  const Routine(
+      {required this.routineId,
+      required this.routineName,
+      required this.routineDays});
 
-
-{
-"ExerciseId": 1,
-"ExerciseName": "Incline Hammer Curls",
-"Muscle": "biceps",
-"Equipment": "dumbbell",
-"Instructions": string
-
-
- */
+  factory Routine.fromJson(Map<String, dynamic> json) {
+    return Routine(
+        routineId: json['RoutineId'],
+        routineName: json['RoutineName'],
+        routineDays: json['RoutineDays']);
+  }
+}

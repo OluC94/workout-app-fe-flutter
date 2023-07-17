@@ -1,27 +1,21 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'models.dart';
+
 String baseURL = 'https://oluc94.pythonanywhere.com';
 
-Future<http.Response> fetchRoutineDetail() {
-  return http.get(Uri.parse('https://oluc94.pythonanywhere.com/routines/1'));
+Future<http.Response> fetchExercises() {
+  return http.get(Uri.parse('$baseURL/exercises'));
 }
 
-class Album {
-  final int routineId;
-  final String routineName;
-  final List routineDays;
+Future<Exercise> fetchExerciseByID() async {
+  final response = await http.get(Uri.parse('$baseURL/exercises/1'));
 
-  const Album(
-      {required this.routineId,
-      required this.routineName,
-      required this.routineDays});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-        routineId: json['RoutineId'],
-        routineName: json['RoutineName'],
-        routineDays: json['RoutineDays']);
+  if (response.statusCode == 200) {
+    return Exercise.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load exercise');
   }
 }
 
