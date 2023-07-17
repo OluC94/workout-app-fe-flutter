@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 
-class RoutineCard extends StatelessWidget {
-  const RoutineCard({super.key});
+class RoutineCard extends StatefulWidget {
+  final int id;
+
+  const RoutineCard({super.key, required this.id});
+
+  @override
+  State<RoutineCard> createState() => _RoutineCardState();
+}
+
+class _RoutineCardState extends State<RoutineCard> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text("placeholder"),

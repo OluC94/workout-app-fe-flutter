@@ -51,7 +51,9 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                 scrollDirection: Axis.vertical,
                 children: const [
                   Text("Placeholder 1"),
-                  RoutineCard(),
+                  RoutineCard(
+                    id: 1,
+                  ),
                 ],
               ),
             )

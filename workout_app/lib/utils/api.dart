@@ -26,20 +26,29 @@ class Album {
 }
 
 Future fetchRoutines() async {
-  http.Response response = await http.get(Uri.parse('$baseURL/routines'));
-
-  if (response.statusCode == 200) {
-    Map mapRes = json.decode(response.body);
-    print(mapRes['routines']);
-    return mapRes['routines'];
+  try {
+    http.Response response = await http.get(Uri.parse('$baseURL/routines'));
+    if (response.statusCode == 200) {
+      Map mapRes = json.decode(response.body);
+      print(mapRes['routines']);
+      return mapRes['routines'];
+    }
+  } catch (err) {
+    print(err);
+    return err;
   }
 }
 
 Future fetchRoutineById(int id) async {
-  http.Response response = await http.get(Uri.parse('$baseURL/routines/$id'));
+  try {
+    http.Response response = await http.get(Uri.parse('$baseURL/routines/$id'));
 
-  Map mapRes = json.decode(response.body);
-  if (response.statusCode == 200) {
-    return mapRes;
+    Map mapRes = json.decode(response.body);
+    if (response.statusCode == 200) {
+      return mapRes;
+    }
+  } catch (err) {
+    print(err);
+    return err;
   }
 }
