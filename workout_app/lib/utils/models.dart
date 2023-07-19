@@ -23,6 +23,16 @@ class Exercise {
   }
 }
 
+class ExerciseList {
+  final List<Exercise> exercises;
+
+  const ExerciseList({required this.exercises});
+
+  factory ExerciseList.fromJson(Map<String, dynamic> json) {
+    return ExerciseList(exercises: json['exercises']);
+  }
+}
+
 class Routine {
   final int routineId;
   final String routineName;

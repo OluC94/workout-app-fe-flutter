@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -5,8 +7,37 @@ import 'models.dart';
 
 String baseURL = 'https://oluc94.pythonanywhere.com';
 
-Future<http.Response> fetchExercises() {
-  return http.get(Uri.parse('$baseURL/exercises'));
+Future<List<Exercise>> fetchExercises() async {
+  final response = await http.get(Uri.parse('$baseURL/exercises'));
+
+  if (response.statusCode == 200) {
+    var jsonRes = jsonDecode(response.body);
+
+    List<Exercise> exercises = [];
+    for (var e in jsonRes['exercises']) {
+      Exercise exercise = Exercise(
+          exerciseId: e['ExerciseId'],
+          exerciseName: e['ExerciseName'],
+          muscle: e['Muscle'],
+          equipment: e['Equipment'],
+          instructions: e['Instructions']);
+      exercises.add(exercise);
+    }
+
+    return exercises;
+  } else {
+    throw Exception('Failed to load exercises');
+  }
+}
+
+Future<ExerciseList> fetchExerciseList() async {
+  final response = await http.get(Uri.parse('$baseURL/exercises'));
+
+  if (response.statusCode == 200) {
+    return ExerciseList.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load exercise list');
+  }
 }
 
 Future<Exercise> fetchExerciseByID() async {
