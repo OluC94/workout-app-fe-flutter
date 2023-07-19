@@ -65,25 +65,28 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                           shrinkWrap: true,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              title: GestureDetector(
-                                onTap: () {
-                                  print(snapshot.data![index].exerciseId);
-                                  navToScreen(
-                                      context,
-                                      ExerciseDetail(
-                                          id: snapshot
-                                              .data![index].exerciseId));
-                                },
-                                child: Text(snapshot.data![index].exerciseName),
+                            return Card(
+                              child: ListTile(
+                                title: GestureDetector(
+                                  onTap: () {
+                                    print(snapshot.data![index].exerciseId);
+                                    navToScreen(
+                                        context,
+                                        ExerciseDetail(
+                                            id: snapshot
+                                                .data![index].exerciseId));
+                                  },
+                                  child:
+                                      Text(snapshot.data![index].exerciseName),
+                                ),
+                                subtitle: Text(snapshot.data![index].muscle
+                                    .parseMuscleName()),
+                                trailing: Text(snapshot.data![index].equipment),
                               ),
-                              subtitle: Text(snapshot.data![index].muscle
-                                  .parseMuscleName()),
-                              trailing: Text(snapshot.data![index].equipment),
                             );
                           });
                     } else if (snapshot.hasError) {
-                      return Text('Error: $snapshot.error');
+                      return Text('Error: ${snapshot.error}');
                     }
                     return const CircularProgressIndicator();
                   }),
