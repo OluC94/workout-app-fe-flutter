@@ -5,6 +5,7 @@ import 'package:workout_app/screens/exercises_main_screen.dart';
 import 'package:workout_app/screens/routines_main_screen.dart';
 
 import '../utils/style_variables.dart';
+import '../utils/util_functions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,15 +54,4 @@ class _HomeScreenState extends State<HomeScreen> {
       )),
     );
   }
-}
-
-void navToScreen(
-  BuildContext context,
-  Widget screen,
-) {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: ((BuildContext context) => screen),
-    ),
-  );
 }
