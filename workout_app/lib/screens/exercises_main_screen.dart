@@ -52,16 +52,15 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           Container(
             height: 350,
             width: 350,
-            padding: const EdgeInsets.all(25),
-            margin: const EdgeInsets.all(25),
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(5),
             child: SizedBox(
-              // scrollDirection: Axis.vertical,
               child: FutureBuilder(
                   future: futureExercises,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      // return Text(snapshot.data![0].exerciseName);
                       return ListView.builder(
+                          padding: const EdgeInsets.all(10),
                           shrinkWrap: true,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
