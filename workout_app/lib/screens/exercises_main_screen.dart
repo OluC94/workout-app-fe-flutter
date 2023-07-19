@@ -5,6 +5,7 @@ import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/main_button.dart';
 import 'package:workout_app/utils/api.dart';
+import 'package:workout_app/utils/parsing_functions.dart';
 
 import '../utils/models.dart';
 import '../utils/style_variables.dart';
@@ -17,14 +18,11 @@ class ExercisesScreen extends StatefulWidget {
 }
 
 class _ExercisesScreenState extends State<ExercisesScreen> {
-  // late Future<Exercise> futureExercise;
   late Future<List<Exercise>> futureExercises;
-  // late Future<ExerciseList> futureExerciseList;
 
   @override
   void initState() {
     super.initState();
-    // futureExerciseList = fetchExerciseList();
     futureExercises = fetchExercises();
   }
 
@@ -40,10 +38,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: () {
-              // print('fetch results: $futureExercises');
-              // print('fetch results: $futureExerciseList');
-            },
+            onTap: () {},
             child: MainButton(
               foregroundColor: Colors.white,
               backgroundColor: mainThemeColour,
@@ -71,8 +66,14 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             return ListTile(
-                              title: Text(snapshot.data![index].exerciseName),
-                              subtitle: Text(snapshot.data![index].muscle),
+                              title: GestureDetector(
+                                onTap: () {
+                                  print(snapshot.data![index].exerciseId);
+                                },
+                                child: Text(snapshot.data![index].exerciseName),
+                              ),
+                              subtitle: Text(snapshot.data![index].muscle
+                                  .parseMuscleName()),
                               trailing: Text(snapshot.data![index].equipment),
                             );
                           });

@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'models.dart';
 
 String baseURL = 'https://oluc94.pythonanywhere.com';
@@ -27,16 +24,6 @@ Future<List<Exercise>> fetchExercises() async {
     return exercises;
   } else {
     throw Exception('Failed to load exercises');
-  }
-}
-
-Future<ExerciseList> fetchExerciseList() async {
-  final response = await http.get(Uri.parse('$baseURL/exercises'));
-
-  if (response.statusCode == 200) {
-    return ExerciseList.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to load exercise list');
   }
 }
 
