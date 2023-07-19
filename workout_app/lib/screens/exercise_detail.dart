@@ -54,6 +54,7 @@ class _ExerciseDetailState extends State<ExerciseDetail> {
                             children: [
                               Text(
                                 snapshot.data!.instructions,
+                                style: const TextStyle(fontSize: 20),
                               )
                             ]),
                       ),

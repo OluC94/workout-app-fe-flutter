@@ -69,7 +69,6 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                               child: ListTile(
                                 title: GestureDetector(
                                   onTap: () {
-                                    print(snapshot.data![index].exerciseId);
                                     navToScreen(
                                         context,
                                         ExerciseDetail(
