@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/main_button.dart';
+import 'package:workout_app/screens/exercise_detail.dart';
 import 'package:workout_app/utils/api.dart';
-import 'package:workout_app/utils/parsing_functions.dart';
+import 'package:workout_app/utils/util_functions.dart';
 
 import '../utils/models.dart';
 import '../utils/style_variables.dart';
@@ -64,20 +65,27 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                           shrinkWrap: true,
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              title: GestureDetector(
-                                onTap: () {
-                                  print(snapshot.data![index].exerciseId);
-                                },
-                                child: Text(snapshot.data![index].exerciseName),
+                            return Card(
+                              child: ListTile(
+                                title: GestureDetector(
+                                  onTap: () {
+                                    navToScreen(
+                                        context,
+                                        ExerciseDetail(
+                                            id: snapshot
+                                                .data![index].exerciseId));
+                                  },
+                                  child:
+                                      Text(snapshot.data![index].exerciseName),
+                                ),
+                                subtitle: Text(snapshot.data![index].muscle
+                                    .parseMuscleName()),
+                                trailing: Text(snapshot.data![index].equipment),
                               ),
-                              subtitle: Text(snapshot.data![index].muscle
-                                  .parseMuscleName()),
-                              trailing: Text(snapshot.data![index].equipment),
                             );
                           });
                     } else if (snapshot.hasError) {
-                      return Text('Error: $snapshot.error');
+                      return Text('Error: ${snapshot.error}');
                     }
                     return const CircularProgressIndicator();
                   }),
@@ -88,24 +96,3 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     );
   }
 }
-
-// 
-
-
-/* 
-
-FutureBuilder(
-  future: futureExercise,
-  builder: (context, snapshot) {
-    if (snapshot.hasData) {
-      print(snapshot.data!.exerciseId);
-      return Text(snapshot.data!.toString());
-    } else if (snapshot.hasError) {
-      return Text('Error: $snapshot.error');
-    } else {
-      return const CircularProgressIndicator();
-    }
-  })
-
-
- */

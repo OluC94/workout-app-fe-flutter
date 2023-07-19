@@ -27,8 +27,8 @@ Future<List<Exercise>> fetchExercises() async {
   }
 }
 
-Future<Exercise> fetchExerciseByID() async {
-  final response = await http.get(Uri.parse('$baseURL/exercises/1'));
+Future<Exercise> fetchExerciseById(int exerciseId) async {
+  final response = await http.get(Uri.parse('$baseURL/exercises/$exerciseId'));
 
   if (response.statusCode == 200) {
     return Exercise.fromJson(jsonDecode(response.body));
