@@ -2,10 +2,21 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'models.dart';
 
-String baseURL = 'https://oluc94.pythonanywhere.com';
+String backendBaseURL = 'https://oluc94.pythonanywhere.com';
+String ninjaBaseURL =
+    'https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises';
+var rapidApiHeaders = {
+  'X-RapidAPI-Key': 'c4495d1c89msh7eb27d50709f331p15cfd0jsnab660d900088',
+  'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'
+};
+
+var params = {
+  'name': '',
+  'muscle': '',
+};
 
 Future<List<Exercise>> fetchExercises() async {
-  final response = await http.get(Uri.parse('$baseURL/exercises'));
+  final response = await http.get(Uri.parse('$backendBaseURL/exercises'));
 
   if (response.statusCode == 200) {
     var jsonRes = jsonDecode(response.body);
@@ -28,7 +39,8 @@ Future<List<Exercise>> fetchExercises() async {
 }
 
 Future<Exercise> fetchExerciseById(int exerciseId) async {
-  final response = await http.get(Uri.parse('$baseURL/exercises/$exerciseId'));
+  final response =
+      await http.get(Uri.parse('$backendBaseURL/exercises/$exerciseId'));
 
   if (response.statusCode == 200) {
     return Exercise.fromJson(jsonDecode(response.body));
@@ -37,30 +49,13 @@ Future<Exercise> fetchExerciseById(int exerciseId) async {
   }
 }
 
-Future fetchRoutines() async {
-  try {
-    http.Response response = await http.get(Uri.parse('$baseURL/routines'));
-    if (response.statusCode == 200) {
-      Map mapRes = json.decode(response.body);
-      print(mapRes['routines']);
-      return mapRes['routines'];
-    }
-  } catch (err) {
-    print(err);
-    return err;
-  }
-}
+Future<void> fetchNinjaExercises() async {
+  final response =
+      await http.get(Uri.parse(ninjaBaseURL), headers: rapidApiHeaders);
 
-Future fetchRoutineById(int id) async {
-  try {
-    http.Response response = await http.get(Uri.parse('$baseURL/routines/$id'));
-
-    Map mapRes = json.decode(response.body);
-    if (response.statusCode == 200) {
-      return mapRes;
-    }
-  } catch (err) {
-    print(err);
-    return err;
+  if (response.statusCode == 200) {
+    print(response.body);
+  } else {
+    throw Exception('Failed to load exercises (API-ninja)');
   }
 }

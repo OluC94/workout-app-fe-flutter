@@ -39,7 +39,9 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              fetchNinjaExercises();
+            },
             child: MainButton(
               foregroundColor: Colors.white,
               backgroundColor: mainThemeColour,
