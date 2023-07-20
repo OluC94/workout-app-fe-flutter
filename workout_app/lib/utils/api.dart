@@ -49,12 +49,18 @@ Future<Exercise> fetchExerciseById(int exerciseId) async {
   }
 }
 
-Future<void> fetchNinjaExercises() async {
-  final response =
-      await http.get(Uri.parse(ninjaBaseURL), headers: rapidApiHeaders);
+Future<List> fetchNinjaExercises([String name = '', String muscle = '']) async {
+  final response = await http.get(
+      Uri.https('exercises-by-api-ninjas.p.rapidapi.com', '/v1/exercises',
+          {'name': name, 'muscle': muscle}),
+      headers: rapidApiHeaders);
+
+  // format data from the ninja search next
 
   if (response.statusCode == 200) {
-    print(response.body);
+    final parsedBody = json.decode(response.body);
+    print('[0] ${parsedBody[0]}');
+    return parsedBody;
   } else {
     throw Exception('Failed to load exercises (API-ninja)');
   }
