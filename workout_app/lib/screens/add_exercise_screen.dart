@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
+import 'package:workout_app/components/custom_search_form.dart';
 
 class AddExercise extends StatefulWidget {
   const AddExercise({super.key});
@@ -16,7 +17,12 @@ class _AddExerciseState extends State<AddExercise> {
         title: 'Add new exercise',
       ),
       body: Center(
-        child: Text('new exercise page'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CustomSearchForm(),
+          ],
+        ),
       ),
     );
   }

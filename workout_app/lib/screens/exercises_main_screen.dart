@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
+import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/main_button.dart';
 import 'package:workout_app/screens/add_exercise_screen.dart';
@@ -53,12 +54,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
             ),
           ),
           const CustomSearchForm(),
-          Container(
-            height: 350,
-            width: 350,
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.all(5),
-            child: SizedBox(
+          CustomListContainer(
+            dataDisplay: SizedBox(
               child: FutureBuilder(
                   future: futureExercises,
                   builder: (context, snapshot) {
