@@ -56,6 +56,8 @@ Future<List> fetchNinjaExercises([String name = '', String muscle = '']) async {
       headers: rapidApiHeaders);
 
   // format data from the ninja search next
+  // extract name, muscle, equipment and instructions, display the first 3
+  // gestureDetect an Add button to add it to the backend
 
   if (response.statusCode == 200) {
     final parsedBody = json.decode(response.body);

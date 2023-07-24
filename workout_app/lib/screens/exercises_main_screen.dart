@@ -1,9 +1,8 @@
-// import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/main_button.dart';
+import 'package:workout_app/screens/add_exercise_screen.dart';
 import 'package:workout_app/screens/exercise_detail.dart';
 import 'package:workout_app/utils/api.dart';
 import 'package:workout_app/utils/util_functions.dart';
@@ -31,6 +30,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: const CustomAppBar(
         title: 'Exercises',
       ),
@@ -41,12 +41,13 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
           GestureDetector(
             onTap: () {
               print(fetchNinjaExercises()); // <--- THIS IS A LIST NOW
+              navToScreen(context, const AddExercise());
             },
             child: MainButton(
               foregroundColor: Colors.white,
               backgroundColor: mainThemeColour,
               borderColor: Colors.grey,
-              text: 'Add exercise',
+              text: 'Add new exercise',
               boxWidth: mainButtonSize,
               boxHeight: mainRectButtonHeight,
             ),
