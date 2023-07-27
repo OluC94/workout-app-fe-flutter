@@ -57,7 +57,6 @@ Future<List> fetchNinjaExercises([String name = '', String muscle = '']) async {
 
   if (response.statusCode == 200) {
     final parsedBody = json.decode(response.body);
-    print('[0] ${parsedBody[0]}');
     return parsedBody;
   } else {
     throw Exception('Failed to load exercises (API-ninja)');
