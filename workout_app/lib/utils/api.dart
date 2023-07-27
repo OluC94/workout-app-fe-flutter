@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:workout_app/utils/secrets.dart';
 import 'dart:convert';
 import 'models.dart';
 
@@ -6,13 +7,8 @@ String backendBaseURL = 'https://oluc94.pythonanywhere.com';
 String ninjaBaseURL =
     'https://exercises-by-api-ninjas.p.rapidapi.com/v1/exercises';
 var rapidApiHeaders = {
-  'X-RapidAPI-Key': 'c4495d1c89msh7eb27d50709f331p15cfd0jsnab660d900088',
+  'X-RapidAPI-Key': rapidApiKey,
   'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'
-};
-
-var params = {
-  'name': '',
-  'muscle': '',
 };
 
 Future<List<Exercise>> fetchExercises() async {
