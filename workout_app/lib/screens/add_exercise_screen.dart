@@ -3,6 +3,7 @@ import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/utils/api.dart';
 import 'package:workout_app/utils/util_functions.dart';
+import 'package:workout_app/utils/util_variables.dart';
 
 class AddExercise extends StatefulWidget {
   const AddExercise({super.key});
@@ -14,12 +15,15 @@ class AddExercise extends StatefulWidget {
 class _AddExerciseState extends State<AddExercise> {
   final _formKey = GlobalKey<FormState>();
   String inputValue = '';
+  String selectedDropdownValue = '';
+  String searchMuscle = '';
   late Future<List> ninjaExercises;
 
   @override
   void initState() {
     super.initState();
-
+    selectedDropdownValue = muscleList[0];
+    searchMuscle = '';
     ninjaExercises = fetchNinjaExercises();
   }
 
@@ -37,7 +41,7 @@ class _AddExerciseState extends State<AddExercise> {
                 key: _formKey,
                 child: SizedBox(
                   width: 300,
-                  height: 150,
+                  height: 175,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -49,10 +53,30 @@ class _AddExerciseState extends State<AddExercise> {
                           });
                         },
                       ),
+                      DropdownButton(
+                        value: selectedDropdownValue,
+                        padding: const EdgeInsets.all(5),
+                        items: muscleList
+                            .map((e) => DropdownMenuItem(
+                                  value: e,
+                                  child: Text(e.parseMuscleName()),
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          print(value);
+                          setState(() {
+                            selectedDropdownValue = (value as String);
+                            value == muscleList[0]
+                                ? searchMuscle = ''
+                                : searchMuscle = value;
+                          });
+                        },
+                      ),
                       ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              ninjaExercises = fetchNinjaExercises(inputValue);
+                              ninjaExercises =
+                                  fetchNinjaExercises(inputValue, searchMuscle);
                             });
                             print(ninjaExercises);
                           },
