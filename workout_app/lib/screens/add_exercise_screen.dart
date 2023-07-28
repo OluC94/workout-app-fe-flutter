@@ -68,30 +68,33 @@ class _AddExerciseState extends State<AddExercise> {
                     if (snapshot.hasData) {
                       // return Text('${snapshot.data!}');
                       // print('snapshot: ${snapshot.data![0].runtimeType}');
-                      return ListView.builder(
-                          padding: const EdgeInsets.all(10),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: ListTile(
-                                  title: Text(snapshot.data![index]['name']),
-                                  subtitle: Text(
-                                      '${snapshot.data![index]['muscle']}'
-                                          .parseMuscleName()),
-                                  trailing:
-                                      Text(snapshot.data![index]['equipment']),
-                                  leading: GestureDetector(
-                                    onTap: () => {
-                                      print(
-                                          "alert, with exrcise details, add exercise to DB on confirmation")
-                                    },
-                                    child: const Icon(
-                                      Icons.add,
-                                    ),
-                                  )),
-                            );
-                          });
+                      return snapshot.data!.isEmpty
+                          ? const Text('No results found')
+                          : ListView.builder(
+                              padding: const EdgeInsets.all(10),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  child: ListTile(
+                                      title:
+                                          Text(snapshot.data![index]['name']),
+                                      subtitle: Text(
+                                          '${snapshot.data![index]['muscle']}'
+                                              .parseMuscleName()),
+                                      trailing: Text(
+                                          snapshot.data![index]['equipment']),
+                                      leading: GestureDetector(
+                                        onTap: () => {
+                                          print(
+                                              "alert, with exrcise details, add exercise to DB on confirmation")
+                                        },
+                                        child: const Icon(
+                                          Icons.add,
+                                        ),
+                                      )),
+                                );
+                              });
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     }
@@ -104,3 +107,14 @@ class _AddExerciseState extends State<AddExercise> {
     );
   }
 }
+
+/* 
+Next steps:
+ - Add filter by body part dropdown
+ - add to backend with error handling (hover window with full details + confirmation)
+ - long tap for quick add(?)
+
+
+
+
+ */
