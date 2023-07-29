@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/utils/api.dart';
+import 'package:workout_app/utils/style_variables.dart';
 import 'package:workout_app/utils/util_functions.dart';
 import 'package:workout_app/utils/util_variables.dart';
 
@@ -55,6 +56,12 @@ class _AddExerciseState extends State<AddExercise> {
                       ),
                       DropdownButton(
                         value: selectedDropdownValue,
+                        menuMaxHeight: 500,
+                        icon: const Icon(Icons.arrow_drop_down_outlined),
+                        underline: Container(
+                          height: 2,
+                          color: mainThemeColour,
+                        ),
                         padding: const EdgeInsets.all(5),
                         items: muscleList
                             .map((e) => DropdownMenuItem(
