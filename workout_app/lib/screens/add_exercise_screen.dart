@@ -85,7 +85,6 @@ class _AddExerciseState extends State<AddExercise> {
                               ninjaExercises =
                                   fetchNinjaExercises(inputValue, searchMuscle);
                             });
-                            print(ninjaExercises);
                           },
                           child: const Icon(Icons.search)),
                     ],
@@ -97,8 +96,6 @@ class _AddExerciseState extends State<AddExercise> {
                   future: ninjaExercises,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      // return Text('${snapshot.data!}');
-                      // print('snapshot: ${snapshot.data![0].runtimeType}');
                       return snapshot.data!.isEmpty
                           ? const Text('No results found')
                           : ListView.builder(
@@ -118,7 +115,23 @@ class _AddExerciseState extends State<AddExercise> {
                                       leading: GestureDetector(
                                         onTap: () => {
                                           print(
-                                              "alert, with exrcise details, add exercise to DB on confirmation")
+                                              "alert, with exrcise details, add exercise to DB on confirmation"),
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  const AlertDialog(
+                                                    title: Text("Alert Title"),
+                                                    content:
+                                                        Text("alert content"),
+                                                    actions: [
+                                                      ElevatedButton(
+                                                          onPressed: null,
+                                                          child: Text("Yes")),
+                                                      ElevatedButton(
+                                                          onPressed: null,
+                                                          child: Text("No")),
+                                                    ],
+                                                  ))
                                         },
                                         child: const Icon(
                                           Icons.add,
@@ -141,11 +154,12 @@ class _AddExerciseState extends State<AddExercise> {
 
 /* 
 Next steps:
- - Add filter by body part dropdown
  - add to backend with error handling (hover window with full details + confirmation)
  - long tap for quick add(?)
 
-
+To-dos:
+ - add filter to exercise list
+ - 
 
 
  */

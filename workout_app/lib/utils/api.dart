@@ -58,3 +58,16 @@ Future<List> fetchNinjaExercises([String name = '', String muscle = '']) async {
     throw Exception('Failed to load exercises (API-ninja)');
   }
 }
+
+// posts return the created item
+Future<Exercise> addExercise(Exercise newExercise) {
+  throw Exception('Failed to add Exercise');
+}
+
+/* 
+
+- add async/await
+- await the http.post
+- if 201 return the Exercise.fromJson
+
+ */
