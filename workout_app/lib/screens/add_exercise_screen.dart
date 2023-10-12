@@ -105,8 +105,39 @@ class _AddExerciseState extends State<AddExercise> {
                               itemBuilder: (context, index) {
                                 return Card(
                                   child: ListTile(
-                                      title:
-                                          Text(snapshot.data![index]['name']),
+                                      title: GestureDetector(
+                                        onTap: () => {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                    title: Text(snapshot
+                                                        .data![index]['name']),
+                                                    content: SizedBox(
+                                                      height: 450,
+                                                      width: 250,
+                                                      child:
+                                                          SingleChildScrollView(
+                                                        child: Text(snapshot
+                                                                .data![index]
+                                                            ['instructions']),
+                                                      ),
+                                                    ),
+                                                    actions: const [
+                                                      ElevatedButton(
+                                                          onPressed: null,
+                                                          child: Text(
+                                                              "Save exercise")),
+                                                      ElevatedButton(
+                                                          onPressed: null,
+                                                          child:
+                                                              Text("Cancel")),
+                                                    ],
+                                                  ))
+                                        },
+                                        child:
+                                            Text(snapshot.data![index]['name']),
+                                      ),
+                                      // Text(snapshot.data![index]['name']),
                                       subtitle: Text(
                                           '${snapshot.data![index]['muscle']}'
                                               .parseMuscleName()),
@@ -116,22 +147,6 @@ class _AddExerciseState extends State<AddExercise> {
                                         onTap: () => {
                                           print(
                                               "alert, with exrcise details, add exercise to DB on confirmation"),
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) =>
-                                                  const AlertDialog(
-                                                    title: Text("Alert Title"),
-                                                    content:
-                                                        Text("alert content"),
-                                                    actions: [
-                                                      ElevatedButton(
-                                                          onPressed: null,
-                                                          child: Text("Yes")),
-                                                      ElevatedButton(
-                                                          onPressed: null,
-                                                          child: Text("No")),
-                                                    ],
-                                                  ))
                                         },
                                         child: const Icon(
                                           Icons.add,
@@ -156,6 +171,10 @@ class _AddExerciseState extends State<AddExercise> {
 Next steps:
  - add to backend with error handling (hover window with full details + confirmation)
  - long tap for quick add(?)
+
+New exercise popup:
+- add logic to check whether new exercise is already in BE
+- Check scrollable area on "Clean from Blocks"
 
 To-dos:
  - add filter to exercise list
