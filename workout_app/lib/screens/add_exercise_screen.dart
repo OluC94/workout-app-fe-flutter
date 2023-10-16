@@ -7,7 +7,12 @@ import 'package:workout_app/utils/util_functions.dart';
 import 'package:workout_app/utils/util_variables.dart';
 
 class AddExercise extends StatefulWidget {
-  const AddExercise({super.key});
+  const AddExercise({
+    Key? key,
+    required this.currentDbExercises,
+  }) : super(key: key);
+
+  final List currentDbExercises;
 
   @override
   State<AddExercise> createState() => _AddExerciseState();
@@ -148,9 +153,13 @@ class _AddExerciseState extends State<AddExercise> {
                                           print(
                                               "alert, with exrcise details, add exercise to DB on confirmation"),
                                         },
-                                        child: const Icon(
-                                          Icons.add,
-                                        ),
+                                        child: isExistingExercise(
+                                                snapshot.data![index]['name'],
+                                                widget.currentDbExercises)
+                                            ? const Icon(
+                                                Icons.add,
+                                              )
+                                            : null,
                                       )),
                                 );
                               });
@@ -174,7 +183,6 @@ Next steps:
 
 New exercise popup:
 - add logic to check whether new exercise is already in BE
-- Check scrollable area on "Clean from Blocks"
 
 To-dos:
  - add filter to exercise list
