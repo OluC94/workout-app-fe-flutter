@@ -20,11 +20,20 @@ class ExercisesScreen extends StatefulWidget {
 
 class _ExercisesScreenState extends State<ExercisesScreen> {
   late Future<List<Exercise>> futureExercises;
+  late List<Exercise> currentExercises;
 
   @override
   void initState() {
     super.initState();
-    futureExercises = fetchExercises();
+    currentExercises = [];
+    futureExercises = fetchExercises().then(
+      (exerciseData) {
+        setState(() {
+          currentExercises = exerciseData;
+        });
+        return exerciseData;
+      },
+    );
   }
 
   @override
@@ -45,7 +54,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
               navToScreen(
                   context,
                   AddExercise(
-                    currentDbExercises: [futureExercises],
+                    currentDbExercises: [currentExercises],
                   ));
             },
             child: MainButton(

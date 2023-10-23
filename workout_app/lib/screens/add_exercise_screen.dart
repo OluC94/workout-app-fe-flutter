@@ -181,6 +181,8 @@ Next steps:
  - add to backend with error handling (hover window with full details + confirmation)
  - long tap for quick add(?)
 
+  extract exercise list from Future in Main Exercise screen, pass that down 
+
 New exercise popup:
 - add logic to check whether new exercise is already in BE
 
