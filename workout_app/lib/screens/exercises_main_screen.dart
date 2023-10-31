@@ -50,12 +50,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         children: [
           GestureDetector(
             onTap: () {
-              print(fetchNinjaExercises()); // <--- THIS IS A LIST NOW
-              navToScreen(
-                  context,
-                  AddExercise(
-                    currentDbExercises: [currentExercises],
-                  ));
+              navToScreen(context, const AddExercise());
             },
             child: MainButton(
               foregroundColor: Colors.white,

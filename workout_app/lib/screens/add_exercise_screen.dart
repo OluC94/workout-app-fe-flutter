@@ -9,10 +9,7 @@ import 'package:workout_app/utils/util_variables.dart';
 class AddExercise extends StatefulWidget {
   const AddExercise({
     Key? key,
-    required this.currentDbExercises,
   }) : super(key: key);
-
-  final List currentDbExercises;
 
   @override
   State<AddExercise> createState() => _AddExerciseState();
@@ -149,18 +146,13 @@ class _AddExerciseState extends State<AddExercise> {
                                       trailing: Text(
                                           snapshot.data![index]['equipment']),
                                       leading: GestureDetector(
-                                        onTap: () => {
-                                          print(
-                                              "alert, with exrcise details, add exercise to DB on confirmation"),
-                                        },
-                                        child: isExistingExercise(
-                                                snapshot.data![index]['name'],
-                                                widget.currentDbExercises)
-                                            ? const Icon(
-                                                Icons.add,
-                                              )
-                                            : null,
-                                      )),
+                                          onTap: () => {
+                                                print(
+                                                    "alert, with exrcise details, add exercise to DB on confirmation"),
+                                              },
+                                          child: const Icon(
+                                            Icons.add,
+                                          ))),
                                 );
                               });
                     } else if (snapshot.hasError) {
@@ -181,10 +173,14 @@ Next steps:
  - add to backend with error handling (hover window with full details + confirmation)
  - long tap for quick add(?)
 
-  extract exercise list from Future in Main Exercise screen, pass that down 
-
 New exercise popup:
 - add logic to check whether new exercise is already in BE
+- need to do the check on addition attempt --> don't pass Instance of DB data through props
+
+Click on + sign to add exercise
+- show a popup with the loading wheel
+- check that the eercise is not already in the db
+- Send appropriate msg 
 
 To-dos:
  - add filter to exercise list
