@@ -61,6 +61,20 @@ Future<List> fetchNinjaExercises([String name = '', String muscle = '']) async {
 
 // posts return the created item
 Future<Exercise> addExercise(Exercise newExercise) {
+  print('within add exercise');
+  print(jsonEncode(newExercise));
+  // Backend works correctly if an exercise ID is sent in the POST request
+
+  // final response = await http.post(Uri.parse('$backendBaseURL/exercises/'),
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //     },
+  //     body: jsonEncode(newExercise));
+
+  // print(response.statusCode);
+  // print(response.body);
+  // if (response.statusCode == 201) {
+  // } else {}
   throw Exception('Failed to add Exercise');
 }
 

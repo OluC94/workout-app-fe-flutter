@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/utils/api.dart';
+import 'package:workout_app/utils/models.dart';
 import 'package:workout_app/utils/style_variables.dart';
 import 'package:workout_app/utils/util_functions.dart';
 import 'package:workout_app/utils/util_variables.dart';
@@ -21,6 +22,7 @@ class _AddExerciseState extends State<AddExercise> {
   String selectedDropdownValue = '';
   String searchMuscle = '';
   late Future<List> ninjaExercises;
+  late Exercise newExercise;
 
   @override
   void initState() {
@@ -28,6 +30,12 @@ class _AddExerciseState extends State<AddExercise> {
     selectedDropdownValue = muscleList[0];
     searchMuscle = '';
     ninjaExercises = fetchNinjaExercises();
+    newExercise = Exercise(
+        exerciseId: 0,
+        exerciseName: '',
+        muscle: '',
+        equipment: '',
+        instructions: '');
   }
 
   @override
@@ -147,8 +155,23 @@ class _AddExerciseState extends State<AddExercise> {
                                           snapshot.data![index]['equipment']),
                                       leading: GestureDetector(
                                           onTap: () => {
+                                                newExercise = Exercise(
+                                                    exerciseId: 101,
+                                                    exerciseName: snapshot
+                                                        .data?[0]['name'],
+                                                    muscle: snapshot.data?[0]
+                                                        ['muscle'],
+                                                    equipment: snapshot.data?[0]
+                                                        ['equipment'],
+                                                    instructions:
+                                                        snapshot.data?[0]
+                                                            ['instructions']),
+                                                // newExercise.exerciseName =
+                                                //     snapshot.data![0]['name, equip, etc'],
+                                                addExercise(newExercise),
                                                 print(
                                                     "alert, with exrcise details, add exercise to DB on confirmation"),
+                                                // print(newExercise),
                                               },
                                           child: const Icon(
                                             Icons.add,
