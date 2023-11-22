@@ -158,20 +158,22 @@ class _AddExerciseState extends State<AddExercise> {
                                                 newExercise = Exercise(
                                                     exerciseId: 101,
                                                     exerciseName: snapshot
-                                                        .data?[0]['name'],
-                                                    muscle: snapshot.data?[0]
-                                                        ['muscle'],
-                                                    equipment: snapshot.data?[0]
-                                                        ['equipment'],
+                                                        .data?[index]['name'],
+                                                    muscle: snapshot
+                                                        .data?[index]['muscle'],
+                                                    equipment:
+                                                        snapshot.data?[index]
+                                                            ['equipment'],
                                                     instructions:
-                                                        snapshot.data?[0]
+                                                        snapshot.data?[index]
                                                             ['instructions']),
                                                 // newExercise.exerciseName =
                                                 //     snapshot.data![0]['name, equip, etc'],
                                                 addExercise(newExercise),
                                                 print(
                                                     "alert, with exrcise details, add exercise to DB on confirmation"),
-                                                // print(newExercise),
+                                                print(snapshot.data?[index]
+                                                    ['name']),
                                               },
                                           child: const Icon(
                                             Icons.add,
