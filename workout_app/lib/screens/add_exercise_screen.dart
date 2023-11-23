@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
+import 'package:workout_app/components/new_exercise_popout.dart';
 import 'package:workout_app/utils/api.dart';
 import 'package:workout_app/utils/models.dart';
 import 'package:workout_app/utils/style_variables.dart';
@@ -42,7 +43,7 @@ class _AddExerciseState extends State<AddExercise> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        title: 'Add new exercise',
+        title: 'Save new exercises',
       ),
       body: Center(
         child: Column(
@@ -119,35 +120,20 @@ class _AddExerciseState extends State<AddExercise> {
                                         onTap: () => {
                                           showDialog(
                                               context: context,
-                                              builder: (context) => AlertDialog(
-                                                    title: Text(snapshot
-                                                        .data![index]['name']),
-                                                    content: SizedBox(
-                                                      height: 450,
-                                                      width: 250,
-                                                      child:
-                                                          SingleChildScrollView(
-                                                        child: Text(snapshot
-                                                                .data![index]
-                                                            ['instructions']),
-                                                      ),
-                                                    ),
-                                                    actions: const [
-                                                      ElevatedButton(
-                                                          onPressed: null,
-                                                          child: Text(
-                                                              "Save exercise")),
-                                                      ElevatedButton(
-                                                          onPressed: null,
-                                                          child:
-                                                              Text("Cancel")),
-                                                    ],
+                                              builder: (context) =>
+                                                  NewExercisePopout(
+                                                    name: snapshot.data![index]
+                                                        ['name'],
+                                                    instructions:
+                                                        snapshot.data![index]
+                                                            ['instructions'],
+                                                    boxHeight: 450,
+                                                    boxWidth: 250,
                                                   ))
                                         },
                                         child:
                                             Text(snapshot.data![index]['name']),
                                       ),
-                                      // Text(snapshot.data![index]['name']),
                                       subtitle: Text(
                                           '${snapshot.data![index]['muscle']}'
                                               .parseMuscleName()),
@@ -167,13 +153,9 @@ class _AddExerciseState extends State<AddExercise> {
                                                     instructions:
                                                         snapshot.data?[index]
                                                             ['instructions']),
-                                                // newExercise.exerciseName =
-                                                //     snapshot.data![0]['name, equip, etc'],
                                                 addExercise(newExercise),
                                                 print(
                                                     "alert, with exrcise details, add exercise to DB on confirmation"),
-                                                print(snapshot.data?[index]
-                                                    ['name']),
                                               },
                                           child: const Icon(
                                             Icons.add,
