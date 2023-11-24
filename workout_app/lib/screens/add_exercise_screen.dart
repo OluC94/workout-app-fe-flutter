@@ -127,6 +127,11 @@ class _AddExerciseState extends State<AddExercise> {
                                                     instructions:
                                                         snapshot.data![index]
                                                             ['instructions'],
+                                                    equipment:
+                                                        snapshot.data![index]
+                                                            ['equipment'],
+                                                    muscle: snapshot
+                                                        .data![index]['muscle'],
                                                     boxHeight: 450,
                                                     boxWidth: 250,
                                                   ))

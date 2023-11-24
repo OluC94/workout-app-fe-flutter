@@ -72,7 +72,7 @@ Future<Exercise> addExercise(Exercise newExercise) async {
   if (response.statusCode == 201) {
     return Exercise.fromJson(json.decode(response.body));
   } else {
-    throw Exception('Failed to add Exercise');
+    throw Exception('Failed to add Exercise - ${response.statusCode}');
   }
 }
 
