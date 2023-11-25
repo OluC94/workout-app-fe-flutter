@@ -26,10 +26,12 @@ class NewExercisePopout extends StatefulWidget {
 
 class _NewExercisePopoutState extends State<NewExercisePopout> {
   late Exercise newExercise;
+  bool addSuccessful = false;
 
   @override
   void initState() {
     super.initState();
+    addSuccessful = false;
     newExercise = Exercise(
         exerciseId: 101,
         exerciseName: widget.name,
@@ -50,8 +52,23 @@ class _NewExercisePopoutState extends State<NewExercisePopout> {
           )),
       actions: [
         ElevatedButton(
-            onPressed: () => {addExercise(newExercise)},
-            child: const Text("Save exercise")),
+            onPressed: () => {
+                  if (addSuccessful)
+                    {}
+                  else
+                    {
+                      addExercise(newExercise)
+                          .then(
+                              (value) => {setState(() => addSuccessful = true)})
+                          .catchError((err) => {
+                                setState(() => addSuccessful = false),
+                                print('$err')
+                              })
+                    }
+                },
+            child: addSuccessful == false
+                ? const Text("Save exercise")
+                : const Icon(Icons.check)),
         ElevatedButton(
             onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
             child: const Text("Cancel")),

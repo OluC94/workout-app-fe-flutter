@@ -158,13 +158,9 @@ class _AddExerciseState extends State<AddExercise> {
                                                     instructions:
                                                         snapshot.data?[index]
                                                             ['instructions']),
-                                                addExercise(newExercise),
-                                                print(
-                                                    "alert, with exrcise details, add exercise to DB on confirmation"),
+                                                addExercise(newExercise)
                                               },
-                                          child: const Icon(
-                                            Icons.add,
-                                          ))),
+                                          child: const Icon(Icons.add))),
                                 );
                               });
                     } else if (snapshot.hasError) {
