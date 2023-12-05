@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
+import 'package:workout_app/components/custom_basic_alert.dart';
 import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/components/new_exercise_popout.dart';
 import 'package:workout_app/utils/api.dart';
@@ -159,6 +160,28 @@ class _AddExerciseState extends State<AddExercise> {
                                                         snapshot.data?[index]
                                                             ['instructions']),
                                                 addExercise(newExercise)
+                                                    .then((value) => {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder: (context) => CustomBasicAlert(
+                                                                  keyWord: snapshot
+                                                                              .data?[
+                                                                          index]
+                                                                      ['name'],
+                                                                  actionDescriptor:
+                                                                      "added"))
+                                                        })
+                                                    .catchError((onError) => {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder: (context) =>
+                                                                  const AlertDialog(
+                                                                    title: Text(
+                                                                        "Something went wrong"),
+                                                                    icon: Icon(Icons
+                                                                        .error),
+                                                                  ))
+                                                        })
                                               },
                                           child: const Icon(Icons.add))),
                                 );

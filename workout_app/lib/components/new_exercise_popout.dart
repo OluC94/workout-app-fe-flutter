@@ -43,66 +43,45 @@ class _NewExercisePopoutState extends State<NewExercisePopout> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.name),
-      content: SizedBox(
-          height: widget.boxHeight,
-          width: widget.boxWidth,
-          child: SingleChildScrollView(
-            child: Text(widget.instructions),
-          )),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () => {
-                      if (addSuccessful)
-                        {}
-                      else
-                        {
-                          addExercise(newExercise)
-                              .then((value) =>
-                                  {setState(() => addSuccessful = true)})
-                              .catchError((err) => {
-                                    setState(() => addSuccessful = false),
-                                    print('$err')
-                                  })
-                        }
-                    },
+        title: Text(widget.name),
+        content: SizedBox(
+            height: widget.boxHeight,
+            width: widget.boxWidth,
+            child: SingleChildScrollView(
+              child: Text(widget.instructions),
+            )),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: () => {
+                        if (addSuccessful)
+                          {}
+                        else
+                          {
+                            addExercise(newExercise)
+                                .then((value) =>
+                                    {setState(() => addSuccessful = true)})
+                                .catchError((err) => {
+                                      setState(() => addSuccessful = false),
+                                      print('$err')
+                                    })
+                          }
+                      },
+                  child: addSuccessful == false
+                      ? const Text("Save exercise")
+                      : const Icon(Icons.check)),
+              ElevatedButton(
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
                 child: addSuccessful == false
-                    ? const Text("Save exercise")
-                    : const Icon(Icons.check)),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-              child: addSuccessful == false
-                  ? const Text("Cancel")
-                  : const Text("Close"),
-            )
-          ],
-        )
-        // ElevatedButton(
-        //     onPressed: () => {
-        //           if (addSuccessful)
-        //             {}
-        //           else
-        //             {
-        //               addExercise(newExercise)
-        //                   .then(
-        //                       (value) => {setState(() => addSuccessful = true)})
-        //                   .catchError((err) => {
-        //                         setState(() => addSuccessful = false),
-        //                         print('$err')
-        //                       })
-        //             }
-        //         },
-        //     child: addSuccessful == false
-        //         ? const Text("Save exercise")
-        //         : const Icon(Icons.check)),
-        // ElevatedButton(
-        //     onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
-        //     child: const Text("Cancel")),
-      ],
-    );
+                    ? const Text("Cancel")
+                    : const Text("Close"),
+              )
+            ],
+          )
+        ]);
   }
 }
