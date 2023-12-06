@@ -163,13 +163,25 @@ class _AddExerciseState extends State<AddExercise> {
                                                     .then((value) => {
                                                           showDialog(
                                                               context: context,
-                                                              builder: (context) => CustomBasicAlert(
-                                                                  keyWord: snapshot
-                                                                              .data?[
-                                                                          index]
-                                                                      ['name'],
-                                                                  actionDescriptor:
-                                                                      "added"))
+                                                              builder:
+                                                                  (context) {
+                                                                Future.delayed(
+                                                                    const Duration(
+                                                                        seconds:
+                                                                            1),
+                                                                    () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                });
+                                                                return CustomBasicAlert(
+                                                                    keyWord: snapshot
+                                                                            .data?[index]
+                                                                        [
+                                                                        'name'],
+                                                                    actionDescriptor:
+                                                                        "added");
+                                                              })
                                                         })
                                                     .catchError((onError) => {
                                                           showDialog(
@@ -198,24 +210,3 @@ class _AddExerciseState extends State<AddExercise> {
     );
   }
 }
-
-/* 
-Next steps:
- - add to backend with error handling (hover window with full details + confirmation)
- - long tap for quick add(?)
-
-New exercise popup:
-- add logic to check whether new exercise is already in BE
-- need to do the check on addition attempt --> don't pass Instance of DB data through props
-
-Click on + sign to add exercise
-- show a popup with the loading wheel
-- check that the eercise is not already in the db
-- Send appropriate msg 
-
-To-dos:
- - add filter to exercise list
- - 
-
-
- */
