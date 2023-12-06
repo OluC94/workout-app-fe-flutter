@@ -23,6 +23,7 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: const CustomAppBar(
         title: "Routines",
       ),

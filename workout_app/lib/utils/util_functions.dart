@@ -20,3 +20,14 @@ extension StringExtension on String {
     return replaceAll('_', ' ').capitalize();
   }
 }
+
+bool isExistingExercise(String exerciseName, List dbExercises) {
+  // function needs to be called as list of Ninja exercises is generated
+  // check if the name provided exists in the list provided by the BE
+  // print(exerciseName);
+  // print(dbExercises[0].length);
+
+  // extract exercise list from future exercises
+
+  return true;
+}

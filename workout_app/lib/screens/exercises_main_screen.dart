@@ -1,9 +1,9 @@
-// import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
+import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/main_button.dart';
+import 'package:workout_app/screens/add_exercise_screen.dart';
 import 'package:workout_app/screens/exercise_detail.dart';
 import 'package:workout_app/utils/api.dart';
 import 'package:workout_app/utils/util_functions.dart';
@@ -20,17 +20,27 @@ class ExercisesScreen extends StatefulWidget {
 
 class _ExercisesScreenState extends State<ExercisesScreen> {
   late Future<List<Exercise>> futureExercises;
+  late List<Exercise> currentExercises;
 
   @override
   void initState() {
     super.initState();
-    futureExercises = fetchExercises();
+    currentExercises = [];
+    futureExercises = fetchExercises().then(
+      (exerciseData) {
+        setState(() {
+          currentExercises = exerciseData;
+        });
+        return exerciseData;
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: const CustomAppBar(
         title: 'Exercises',
       ),
@@ -39,23 +49,21 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navToScreen(context, const AddExercise());
+            },
             child: MainButton(
               foregroundColor: Colors.white,
               backgroundColor: mainThemeColour,
               borderColor: Colors.grey,
-              text: 'Add exercise',
+              text: 'Add new exercise',
               boxWidth: mainButtonSize,
               boxHeight: mainRectButtonHeight,
             ),
           ),
           const CustomSearchForm(),
-          Container(
-            height: 350,
-            width: 350,
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.all(5),
-            child: SizedBox(
+          CustomListContainer(
+            dataDisplay: SizedBox(
               child: FutureBuilder(
                   future: futureExercises,
                   builder: (context, snapshot) {

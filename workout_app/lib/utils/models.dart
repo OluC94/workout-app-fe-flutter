@@ -1,11 +1,11 @@
 class Exercise {
-  final int exerciseId;
-  final String exerciseName;
-  final String muscle;
-  final String equipment;
-  final String instructions;
+  int exerciseId;
+  String exerciseName;
+  String muscle;
+  String equipment;
+  String instructions;
 
-  const Exercise({
+  Exercise({
     required this.exerciseId,
     required this.exerciseName,
     required this.muscle,
@@ -20,6 +20,16 @@ class Exercise {
         muscle: json['Muscle'],
         equipment: json['Equipment'],
         instructions: json['Instructions']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ExerciseId': exerciseId,
+      'ExerciseName': exerciseName,
+      'Muscle': muscle,
+      'Equipment': equipment,
+      'Instructions': instructions,
+    };
   }
 }
 
