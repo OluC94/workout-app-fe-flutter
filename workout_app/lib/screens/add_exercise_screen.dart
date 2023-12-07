@@ -59,13 +59,11 @@ class _AddExerciseState extends State<AddExercise> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text('Filter by exercise name'),
-                      TextFormField(
-                        onChanged: (value) {
-                          setState(() {
-                            inputValue = value;
-                          });
-                        },
-                      ),
+                      TextFormField(onChanged: (value) {
+                        setState(() {
+                          inputValue = value;
+                        });
+                      }),
                       DropdownButton(
                         value: selectedDropdownValue,
                         menuMaxHeight: 500,

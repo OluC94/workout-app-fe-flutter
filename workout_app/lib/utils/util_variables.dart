@@ -17,3 +17,16 @@ final muscleList = [
   'traps',
   'triceps',
 ];
+
+final equipmentList = [
+  'barbell',
+  'body_only',
+  'cable',
+  'dumbbell',
+  'e-z_curl_bar',
+  'exercise_ball',
+  'kettlebells',
+  'machine',
+  'None',
+  'other',
+];

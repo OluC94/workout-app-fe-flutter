@@ -21,10 +21,17 @@ class ExercisesScreen extends StatefulWidget {
 class _ExercisesScreenState extends State<ExercisesScreen> {
   late Future<List<Exercise>> futureExercises;
   late List<Exercise> currentExercises;
+  final _formKey = GlobalKey<FormState>();
+  String searchName = '';
+  String searchMuscle = '';
+  String searchEquipment = '';
 
   @override
   void initState() {
     super.initState();
+    searchName = '';
+    searchMuscle = '';
+    searchEquipment = '';
     currentExercises = [];
     futureExercises = fetchExercises().then(
       (exerciseData) {
@@ -61,43 +68,75 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
               boxHeight: mainRectButtonHeight,
             ),
           ),
-          const CustomSearchForm(),
-          CustomListContainer(
-            dataDisplay: SizedBox(
-              child: FutureBuilder(
-                  future: futureExercises,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
-                          padding: const EdgeInsets.all(10),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              child: ListTile(
-                                title: GestureDetector(
-                                  onTap: () {
-                                    navToScreen(
-                                        context,
-                                        ExerciseDetail(
-                                            id: snapshot
-                                                .data![index].exerciseId));
-                                  },
-                                  child:
-                                      Text(snapshot.data![index].exerciseName),
-                                ),
-                                subtitle: Text(snapshot.data![index].muscle
-                                    .parseMuscleName()),
-                                trailing: Text(snapshot.data![index].equipment),
-                              ),
-                            );
+          // const CustomSearchForm(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Form(
+                  key: _formKey,
+                  child: SizedBox(
+                    width: 300,
+                    height: 175,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Search existing exercises'),
+                        TextFormField(onChanged: (value) {
+                          setState(() {
+                            searchName = value;
                           });
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    return const CircularProgressIndicator();
-                  }),
-            ),
+                        }),
+                        // Dropdowns button here
+                        ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                futureExercises = fetchExercises(
+                                    searchName, searchMuscle, searchEquipment);
+                              });
+                            },
+                            child: const Icon(Icons.search))
+                      ],
+                    ),
+                  )),
+              CustomListContainer(
+                dataDisplay: SizedBox(
+                  child: FutureBuilder(
+                      future: futureExercises,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                              padding: const EdgeInsets.all(10),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  child: ListTile(
+                                    title: GestureDetector(
+                                      onTap: () {
+                                        navToScreen(
+                                            context,
+                                            ExerciseDetail(
+                                                id: snapshot
+                                                    .data![index].exerciseId));
+                                      },
+                                      child: Text(
+                                          snapshot.data![index].exerciseName),
+                                    ),
+                                    subtitle: Text(snapshot.data![index].muscle
+                                        .parseMuscleName()),
+                                    trailing:
+                                        Text(snapshot.data![index].equipment),
+                                  ),
+                                );
+                              });
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+                        return const CircularProgressIndicator();
+                      }),
+                ),
+              ),
+            ],
           )
         ],
       )),
