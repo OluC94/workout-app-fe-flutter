@@ -1,5 +1,5 @@
 final muscleList = [
-  'Filter by target muscle...',
+  'Filter by muscle...',
   'abdominals',
   'abductors',
   'adductors',
@@ -19,6 +19,7 @@ final muscleList = [
 ];
 
 final equipmentList = [
+  'Filter by equipment...',
   'barbell',
   'body_only',
   'cable',

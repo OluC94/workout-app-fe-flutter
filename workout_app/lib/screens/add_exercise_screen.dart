@@ -68,10 +68,7 @@ class _AddExerciseState extends State<AddExercise> {
                         value: selectedDropdownValue,
                         menuMaxHeight: 500,
                         icon: const Icon(Icons.arrow_drop_down_outlined),
-                        underline: Container(
-                          height: 2,
-                          color: mainThemeColour,
-                        ),
+                        underline: Container(height: 2, color: mainThemeColour),
                         padding: const EdgeInsets.all(5),
                         items: muscleList
                             .map((e) => DropdownMenuItem(
@@ -80,7 +77,6 @@ class _AddExerciseState extends State<AddExercise> {
                                 ))
                             .toList(),
                         onChanged: (value) {
-                          print(value);
                           setState(() {
                             selectedDropdownValue = (value as String);
                             value == muscleList[0]

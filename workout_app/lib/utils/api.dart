@@ -13,12 +13,17 @@ var rapidApiHeaders = {
 
 Future<List<Exercise>> fetchExercises(
     [String name = '', String muscle = '', String equipment = '']) async {
-  final response = await http.get(Uri.parse('$backendBaseURL/exercises')
-      .replace(queryParameters: {
+  final params = {
     'ExerciseName': name,
     'Muscle': muscle,
     'Equipment': equipment
-  }));
+  };
+
+  // final uri = Uri.https('oluc94.pythonanywhere.com', '/exercises', params);
+  // final response = await http.get(uri); // <-- try this
+
+  final response = await http.get(
+      Uri.parse('$backendBaseURL/exercises').replace(queryParameters: params));
 
   if (response.statusCode == 200) {
     var jsonRes = jsonDecode(response.body);
