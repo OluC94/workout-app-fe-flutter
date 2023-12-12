@@ -19,13 +19,22 @@ Future<List<Exercise>> fetchExercises(
     'Equipment': equipment
   };
 
-  // final uri = Uri.https('oluc94.pythonanywhere.com', '/exercises', params);
-  // final response = await http.get(uri); // <-- try this
+  if (name.isEmpty) {
+    params.remove('ExerciseName');
+  }
+  if (muscle.isEmpty) {
+    params.remove('Muscle');
+  }
+  if (equipment.isEmpty) {
+    params.remove('Equipment');
+  }
 
   final response = await http.get(
       Uri.parse('$backendBaseURL/exercises').replace(queryParameters: params));
 
   if (response.statusCode == 200) {
+    print(Uri.parse('$backendBaseURL/exercises')
+        .replace(queryParameters: params));
     var jsonRes = jsonDecode(response.body);
 
     List<Exercise> exercises = [];

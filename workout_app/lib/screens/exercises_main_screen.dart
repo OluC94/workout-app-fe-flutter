@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
-import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/main_button.dart';
 import 'package:workout_app/screens/add_exercise_screen.dart';
 import 'package:workout_app/screens/exercise_detail.dart';
@@ -20,8 +19,7 @@ class ExercisesScreen extends StatefulWidget {
 }
 
 class _ExercisesScreenState extends State<ExercisesScreen> {
-  late Future<List<Exercise>> futureExercises;
-  late List<Exercise> currentExercises;
+  late Future<List<Exercise>> currentExercises;
   final _formKey = GlobalKey<FormState>();
   String searchName = '';
   String searchMuscle = '';
@@ -37,15 +35,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     searchEquipment = '';
     selectedDropdownValueMuscle = muscleList[0];
     selectedDropdownValueEquipment = equipmentList[0];
-    currentExercises = [];
-    futureExercises = fetchExercises().then(
-      (exerciseData) {
-        setState(() {
-          currentExercises = exerciseData;
-        });
-        return exerciseData;
-      },
-    );
+    currentExercises = fetchExercises();
   }
 
   @override
@@ -91,8 +81,11 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                             searchName = value;
                           });
                         }),
+                        // const Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [Text("left"), Text('right')],
+                        // ),
                         // Dropdown button here - use a different popout for selecting equipment
-                        // muscle filter not working for some reason
                         DropdownButton(
                             value: selectedDropdownValueMuscle,
                             menuMaxHeight: 400,
@@ -117,7 +110,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                         ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                futureExercises = fetchExercises(
+                                currentExercises = fetchExercises(
                                     searchName, searchMuscle, searchEquipment);
                               });
                             },
@@ -128,7 +121,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
               CustomListContainer(
                 dataDisplay: SizedBox(
                   child: FutureBuilder(
-                      future: futureExercises,
+                      future: currentExercises,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return ListView.builder(
