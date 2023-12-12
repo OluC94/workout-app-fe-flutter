@@ -33,8 +33,6 @@ Future<List<Exercise>> fetchExercises(
       Uri.parse('$backendBaseURL/exercises').replace(queryParameters: params));
 
   if (response.statusCode == 200) {
-    print(Uri.parse('$backendBaseURL/exercises')
-        .replace(queryParameters: params));
     var jsonRes = jsonDecode(response.body);
 
     List<Exercise> exercises = [];

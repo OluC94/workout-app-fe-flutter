@@ -70,7 +70,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
               Form(
                   key: _formKey,
                   child: SizedBox(
-                    width: 300,
+                    width: 330,
                     height: 175,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -81,32 +81,57 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                             searchName = value;
                           });
                         }),
-                        // const Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [Text("left"), Text('right')],
-                        // ),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              DropdownButton(
+                                  value: selectedDropdownValueMuscle,
+                                  menuMaxHeight: 400,
+                                  icon: const Icon(
+                                      Icons.arrow_drop_down_outlined),
+                                  underline: Container(
+                                      height: 2, color: mainThemeColour),
+                                  padding: const EdgeInsets.all(5),
+                                  items: muscleList
+                                      .map((e) => DropdownMenuItem(
+                                            value: e,
+                                            child: Text(e.parseMuscleName()),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedDropdownValueMuscle =
+                                          (value as String);
+                                      value == muscleList[0]
+                                          ? searchMuscle = ''
+                                          : searchMuscle = value;
+                                    });
+                                  }),
+                              DropdownButton(
+                                  value: selectedDropdownValueEquipment,
+                                  menuMaxHeight: 400,
+                                  icon: const Icon(
+                                      Icons.arrow_drop_down_outlined),
+                                  underline: Container(
+                                      height: 2, color: mainThemeColour),
+                                  padding: const EdgeInsets.all(5),
+                                  items: equipmentList
+                                      .map((e) => DropdownMenuItem(
+                                            value: e,
+                                            child: Text(e.parseMuscleName()),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedDropdownValueEquipment =
+                                          (value as String);
+                                      value == equipmentList[0]
+                                          ? searchEquipment = ''
+                                          : searchEquipment = value;
+                                    });
+                                  }),
+                            ]),
                         // Dropdown button here - use a different popout for selecting equipment
-                        DropdownButton(
-                            value: selectedDropdownValueMuscle,
-                            menuMaxHeight: 400,
-                            icon: const Icon(Icons.arrow_drop_down_outlined),
-                            underline:
-                                Container(height: 2, color: mainThemeColour),
-                            padding: const EdgeInsets.all(5),
-                            items: muscleList
-                                .map((e) => DropdownMenuItem(
-                                      value: e,
-                                      child: Text(e.parseMuscleName()),
-                                    ))
-                                .toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                selectedDropdownValueMuscle = (value as String);
-                                value == muscleList[0]
-                                    ? searchMuscle = ''
-                                    : searchMuscle = value;
-                              });
-                            }),
                         ElevatedButton(
                             onPressed: () {
                               setState(() {
