@@ -1,5 +1,5 @@
 final muscleList = [
-  'Filter by target muscle...',
+  'Filter muscle...',
   'abdominals',
   'abductors',
   'adductors',
@@ -16,4 +16,18 @@ final muscleList = [
   'quadriceps',
   'traps',
   'triceps',
+];
+
+final equipmentList = [
+  'Filter equipment...',
+  'barbell',
+  'body_only',
+  'cable',
+  'dumbbell',
+  'e-z_curl_bar',
+  'exercise_ball',
+  'kettlebells',
+  'machine',
+  'None',
+  'other',
 ];

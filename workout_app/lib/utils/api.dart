@@ -11,8 +11,26 @@ var rapidApiHeaders = {
   'X-RapidAPI-Host': 'exercises-by-api-ninjas.p.rapidapi.com'
 };
 
-Future<List<Exercise>> fetchExercises() async {
-  final response = await http.get(Uri.parse('$backendBaseURL/exercises'));
+Future<List<Exercise>> fetchExercises(
+    [String name = '', String muscle = '', String equipment = '']) async {
+  final params = {
+    'ExerciseName': name,
+    'Muscle': muscle,
+    'Equipment': equipment
+  };
+
+  if (name.isEmpty) {
+    params.remove('ExerciseName');
+  }
+  if (muscle.isEmpty) {
+    params.remove('Muscle');
+  }
+  if (equipment.isEmpty) {
+    params.remove('Equipment');
+  }
+
+  final response = await http.get(
+      Uri.parse('$backendBaseURL/exercises').replace(queryParameters: params));
 
   if (response.statusCode == 200) {
     var jsonRes = jsonDecode(response.body);
@@ -61,7 +79,7 @@ Future<List> fetchNinjaExercises([String name = '', String muscle = '']) async {
 
 // posts return the created item
 Future<Exercise> addExercise(Exercise newExercise) async {
-  // Backend works correctly if an exercise ID is sent in the POST request
+  // Backend works correctly even if an exercise ID is sent in the POST request
 
   final response = await http.post(Uri.parse('$backendBaseURL/exercises/'),
       headers: <String, String>{
@@ -75,11 +93,3 @@ Future<Exercise> addExercise(Exercise newExercise) async {
     throw Exception('Failed to add Exercise - ${response.statusCode}');
   }
 }
-
-/* 
-
-- add async/await
-- await the http.post
-- if 201 return the Exercise.fromJson
-
- */
