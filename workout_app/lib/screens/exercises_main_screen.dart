@@ -149,31 +149,34 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                       future: currentExercises,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return ListView.builder(
-                              padding: const EdgeInsets.all(20),
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  child: ListTile(
-                                    title: GestureDetector(
-                                      onTap: () {
-                                        navToScreen(
-                                            context,
-                                            ExerciseDetail(
-                                                id: snapshot
-                                                    .data![index].exerciseId));
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].exerciseName),
-                                    ),
-                                    subtitle: Text(snapshot.data![index].muscle
-                                        .parseMuscleName()),
-                                    trailing:
-                                        Text(snapshot.data![index].equipment),
-                                  ),
-                                );
-                              });
+                          return snapshot.data!.isEmpty
+                              ? const Text('No exercises found')
+                              : ListView.builder(
+                                  padding: const EdgeInsets.all(20),
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.length,
+                                  itemBuilder: (context, index) {
+                                    return Card(
+                                      child: ListTile(
+                                        title: GestureDetector(
+                                          onTap: () {
+                                            navToScreen(
+                                                context,
+                                                ExerciseDetail(
+                                                    id: snapshot.data![index]
+                                                        .exerciseId));
+                                          },
+                                          child: Text(snapshot
+                                              .data![index].exerciseName),
+                                        ),
+                                        subtitle: Text(snapshot
+                                            .data![index].muscle
+                                            .parseMuscleName()),
+                                        trailing: Text(
+                                            snapshot.data![index].equipment),
+                                      ),
+                                    );
+                                  });
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         }
