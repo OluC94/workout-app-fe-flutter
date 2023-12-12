@@ -43,27 +43,22 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
-      appBar: const CustomAppBar(
-        title: 'Exercises',
-      ),
+      appBar: const CustomAppBar(title: 'Exercises'),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GestureDetector(
-            onTap: () {
-              navToScreen(context, const AddExercise());
-            },
-            child: MainButton(
-              foregroundColor: Colors.white,
-              backgroundColor: mainThemeColour,
-              borderColor: Colors.grey,
-              text: 'Add new exercise',
-              boxWidth: mainButtonSize,
-              boxHeight: mainRectButtonHeight,
-            ),
-          ),
-          // const CustomSearchForm(),
+              onTap: () {
+                navToScreen(context, const AddExercise());
+              },
+              child: MainButton(
+                  foregroundColor: Colors.white,
+                  backgroundColor: mainThemeColour,
+                  borderColor: Colors.grey,
+                  text: 'Add new exercise',
+                  boxWidth: mainButtonSize,
+                  boxHeight: mainRectButtonHeight)),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -129,9 +124,8 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                                           ? searchEquipment = ''
                                           : searchEquipment = value;
                                     });
-                                  }),
+                                  })
                             ]),
-                        // Dropdown button here - use a different popout for selecting equipment
                         ElevatedButton(
                             onPressed: () {
                               setState(() {
