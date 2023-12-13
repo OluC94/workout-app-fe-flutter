@@ -93,3 +93,24 @@ Future<Exercise> addExercise(Exercise newExercise) async {
     throw Exception('Failed to add Exercise - ${response.statusCode}');
   }
 }
+
+Future<List<Routine>> fetchRoutines() async {
+  final response = await http.get(Uri.parse('$backendBaseURL/routines'));
+
+  if (response.statusCode == 200) {
+    var jsonRes = jsonDecode(response.body);
+
+    List<Routine> routines = [];
+    for (var e in jsonRes['routines']) {
+      Routine routine = Routine(
+          routineId: e['RoutineId'],
+          routineName: e['RoutineName'],
+          routineDays: e['RoutineDays']);
+      routines.add(routine);
+    }
+
+    return routines;
+  } else {
+    throw Exception('Failed to load routines');
+  }
+}
