@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
+import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/routine_card.dart';
+import 'package:workout_app/utils/api.dart';
+import 'package:workout_app/utils/models.dart';
 import 'package:workout_app/utils/style_variables.dart';
 
 import '../components/main_button.dart';
@@ -14,9 +17,12 @@ class RoutinesScreen extends StatefulWidget {
 }
 
 class _RoutinesScreenState extends State<RoutinesScreen> {
+  late Future<List<Routine>> currentRoutines;
+
   @override
   void initState() {
     super.initState();
+    currentRoutines = fetchRoutines();
   }
 
   @override
@@ -43,21 +49,42 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
               ),
             ),
             const CustomSearchForm(),
-            Container(
-              height: 350,
-              width: 350,
-              padding: const EdgeInsets.all(25),
-              margin: const EdgeInsets.all(25),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: const [
-                  Text("Placeholder 1"),
-                  RoutineCard(
-                    id: 1,
-                  ),
-                ],
-              ),
-            )
+            CustomListContainer(
+                dataDisplay: SizedBox(
+              child: FutureBuilder(
+                  future: currentRoutines,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return snapshot.data!.isEmpty
+                          ? const Text('No routines found')
+                          : ListView.builder(
+                              padding: const EdgeInsets.all(20),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  child: GestureDetector(
+                                    onTap: () {},
+                                    child: ListTile(
+                                      title: Text(
+                                          snapshot.data![index].routineName),
+                                      subtitle: snapshot.data![index]
+                                                  .routineDays.length ==
+                                              1
+                                          ? Text(
+                                              "${snapshot.data![index].routineDays.length} day")
+                                          : Text(
+                                              "${snapshot.data![index].routineDays.length} days"),
+                                    ),
+                                  ),
+                                );
+                              });
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+                    return const CircularProgressIndicator();
+                  }),
+            ))
           ],
         ),
       ),
