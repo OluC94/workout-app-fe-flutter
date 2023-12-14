@@ -43,6 +43,36 @@ class ExerciseList {
   }
 }
 
+class Day {
+  final int dayId;
+  final String dayName;
+  final List<Exercise> dayExercises;
+
+  const Day(
+      {required this.dayId, required this.dayName, required this.dayExercises});
+
+  factory Day.fromJson(Map<String, dynamic> json) {
+    return Day(
+        dayId: json['DayId'],
+        dayName: json['DayName'],
+        dayExercises: json['DayExercises']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {'DayId': dayId, 'DayName': dayName, 'DayExercises': dayExercises};
+  }
+}
+
+class DayList {
+  final List<Day> days;
+
+  const DayList({required this.days});
+
+  factory DayList.fromJson(Map<String, dynamic> json) {
+    return DayList(days: json['days']);
+  }
+}
+
 class Routine {
   final int routineId;
   final String routineName;
@@ -58,5 +88,23 @@ class Routine {
         routineId: json['RoutineId'],
         routineName: json['RoutineName'],
         routineDays: json['RoutineDays']);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'RoutineId': routineId,
+      'RoutineName': routineName,
+      'RoutineDays': routineDays
+    };
+  }
+}
+
+class RoutineList {
+  final List<Routine> routines;
+
+  const RoutineList({required this.routines});
+
+  factory RoutineList.fromJson(Map<String, dynamic> json) {
+    return RoutineList(routines: json['routines']);
   }
 }
