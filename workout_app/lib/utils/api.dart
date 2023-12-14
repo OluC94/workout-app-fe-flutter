@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:http/http.dart' as http;
 import 'package:workout_app/utils/secrets.dart';
 import 'dart:convert';
@@ -112,5 +114,16 @@ Future<List<Routine>> fetchRoutines() async {
     return routines;
   } else {
     throw Exception('Failed to load routines');
+  }
+}
+
+Future<Routine> fetchRoutineById(int routineId) async {
+  final response =
+      await http.get(Uri.parse('$backendBaseURL/routines/$routineId'));
+
+  if (response.statusCode == 200) {
+    return Routine.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load routine');
   }
 }

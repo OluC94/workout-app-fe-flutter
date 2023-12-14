@@ -3,9 +3,11 @@ import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/components/custom_search_form.dart';
 import 'package:workout_app/components/routine_card.dart';
+import 'package:workout_app/screens/routine_detail.dart';
 import 'package:workout_app/utils/api.dart';
 import 'package:workout_app/utils/models.dart';
 import 'package:workout_app/utils/style_variables.dart';
+import 'package:workout_app/utils/util_functions.dart';
 
 import '../components/main_button.dart';
 
@@ -64,7 +66,15 @@ class _RoutinesScreenState extends State<RoutinesScreen> {
                               itemBuilder: (context, index) {
                                 return Card(
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      navToScreen(
+                                          context,
+                                          RoutineDetail(
+                                            id: snapshot.data![index].routineId,
+                                            title: snapshot
+                                                .data![index].routineName,
+                                          ));
+                                    },
                                     child: ListTile(
                                       title: Text(
                                           snapshot.data![index].routineName),
