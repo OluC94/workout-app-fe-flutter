@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
+import 'package:workout_app/components/exercise_expansion_card.dart';
 import 'package:workout_app/utils/api.dart';
 import 'package:workout_app/utils/models.dart';
 
@@ -34,7 +35,8 @@ class _RoutineDetailState extends State<RoutineDetail> {
       ),
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text("Big round '+' icon"),
+        const Text(
+            " 'Add a day to this routine' with a '+' icon, gesture detector, rnew branch"),
         CustomListContainer(
             dataDisplay: SizedBox(
           child: FutureBuilder(
@@ -46,13 +48,17 @@ class _RoutineDetailState extends State<RoutineDetail> {
                       shrinkWrap: true,
                       itemCount: snapshot.data!.routineDays.length,
                       itemBuilder: (context, index) {
-                        return Card(
-                            child: GestureDetector(
-                          onTap: () {},
-                          child: ListTile(
-                              title: Text(snapshot.data!.routineDays[index]
-                                  ["DayName"])),
-                        ));
+                        return ExpansionTile(
+                          leading: GestureDetector(
+                            onTap: () {
+                              print("nav to day");
+                            },
+                            child: const Icon(Icons.info),
+                          ),
+                          title: Text(
+                              snapshot.data!.routineDays[index]["DayName"]),
+                          children: const [ExerciseExpansionCard()],
+                        );
                       });
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
