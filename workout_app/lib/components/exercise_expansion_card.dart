@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
-class ExerciseExpansionCard extends StatefulWidget {
-  const ExerciseExpansionCard({super.key});
+class ExerciseExpansionCard extends StatelessWidget {
+  final List exercises;
 
-  @override
-  State<ExerciseExpansionCard> createState() => _ExerciseExpansionCardState();
-}
+  const ExerciseExpansionCard({super.key, required this.exercises});
 
-class _ExerciseExpansionCardState extends State<ExerciseExpansionCard> {
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      height: 80,
-      width: 250,
-      child: Text("Bring in the list of Exercises - display exercise names"),
-    );
+    return exercises.isNotEmpty
+        ? SizedBox(
+            height: 80,
+            width: 250,
+            child: ListView.builder(
+                padding: const EdgeInsets.all(5),
+                shrinkWrap: true,
+                itemCount: exercises.length,
+                itemBuilder: (context, index) {
+                  return Text(exercises[index]["ExerciseName"]);
+                }))
+        : const Text("No exercsies listed");
   }
 }
