@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_app/components/app_bar.dart';
 import 'package:workout_app/components/custom_list_container.dart';
 import 'package:workout_app/components/custom_search_form.dart';
-import 'package:workout_app/components/routine_card.dart';
+// import 'package:workout_app/components/routine_card.dart';
 import 'package:workout_app/screens/add_routine.dart';
 import 'package:workout_app/screens/routine_detail.dart';
 import 'package:workout_app/utils/api.dart';
